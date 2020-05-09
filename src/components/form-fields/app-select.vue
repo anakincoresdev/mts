@@ -1,7 +1,10 @@
 <template>
   <label class="app-select">
+    <span class="app-select__label">
+      {{ label }}
+    </span>
     <div
-      @click="isOpen = true"
+      @click="isOpen = !isOpen"
       :class="{'app-select__controls--focus': isOpen}"
       class="app-select__controls"
     >
@@ -34,6 +37,10 @@ export default {
         { label: 'Опция 3', value: 3 },
       ],
     },
+    label: {
+      type: String,
+      default: '',
+    },
     placeholder: String,
   },
   data() {
@@ -55,6 +62,13 @@ export default {
   .app-select {
     position: relative;
     display: block;
+    &__label {
+      color: #333333;
+      font-size: 12px;
+      margin-bottom: 5px;
+      display: block;
+      font-weight: 500;
+    }
     &__controls {
       display: flex;
       align-items: center;
@@ -65,6 +79,7 @@ export default {
       border: $border-field;
       transition: $ui-transition;
       cursor: pointer;
+      font-size: 15px;
       &--focus {
         border: $border-field-focus;
         transition: $ui-transition;
@@ -88,6 +103,7 @@ export default {
       padding: 0 14px;
       transition: $ui-transition;
       cursor: pointer;
+      overflow: hidden;
       &:hover {
         transition: $ui-transition;
         background: $bg-hover-color;

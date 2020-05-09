@@ -43,23 +43,28 @@
         </h1>
         <div class="rule-modal__fields">
           <app-select
-            placeholder="Параметр"
+            placeholder="Выберите параметр"
+            label="Параметр"
+            :options="[{label: 'Отдел', value: 'department'}]"
             class="rule-modal__select"
           />
+          <department-form class="rule-modal__department" />
           <app-select
-            placeholder="Баллы при совпадении"
+            label="Баллы при совпадении"
+            :options="[{label: '2', value: 2},{label: '3', value: 3},{label: '4', value: 4},{label: '5', value: 5}]"
+            placeholder="Выберите количество баллов"
             class="rule-modal__select"
           />
         </div>
         <div class="create__buttons">
           <app-button
-            @click="save"
+            @click="addRule"
             class="create__button"
           >
             Сохранить
           </app-button>
           <app-button
-            @click="$router.push({name: 'home'})"
+            @click="isModalOpen = false"
             outline
             class="create__button"
           >
@@ -78,6 +83,7 @@ import AddButton from '../components/ui/add-button.vue'
 import AppButton from '../components/ui/app-button.vue'
 import ModalWindow from '../components/modal-window.vue'
 import AppSelect from '../components/form-fields/app-select.vue'
+import DepartmentForm from '../components/department-form.vue'
 
 export default {
   name: "create",
@@ -88,6 +94,7 @@ export default {
     AppButton,
     ModalWindow,
     AppSelect,
+    DepartmentForm,
   },
   data() {
     return {
@@ -101,6 +108,9 @@ export default {
     },
     save() {
       this.$router.push({name: 'home'});
+    },
+    addRule() {
+
     },
   },
 }
@@ -141,6 +151,12 @@ export default {
     }
     &__fields {
       margin-bottom: 35px;
+    }
+    &__select {
+      margin-bottom: 15px;
+    }
+    &__department {
+      margin-bottom: 25px;
     }
   }
 </style>
