@@ -77,7 +77,7 @@ export default {
       box-shadow: $shadow-default;
       background-color: $bg-default-color;
       border-radius: 3px;
-      /*z-index: 2;*/
+      z-index: 2;
     }
     &__option {
       font-size: $ui-font-size;
