@@ -29,6 +29,7 @@
     color: $contrast-text-color;
     font-size: $ui-font-size;
     transition: $ui-transition;
+    border-radius: 3px;
     &:hover {
       background-color: darken($main-color, 7%);
       transition: $ui-transition;

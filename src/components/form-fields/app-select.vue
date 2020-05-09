@@ -1,26 +1,24 @@
 <template>
   <label class="app-select">
     <div
-      @click="isOpen = !isOpen"
+      @click="isOpen = true"
       :class="{'app-select__controls--focus': isOpen}"
       class="app-select__controls"
     >
-      {{ selected.label || 'Выберите опцию' }}
+      {{ selected.label || placeholder }}
     </div>
-    <transition name="fade">
-      <ul
-        v-if="isOpen"
-        class="app-select__options"
+    <div
+      v-if="isOpen"
+      class="app-select__options"
+    >
+      <div
+        v-for="option in options"
+        @click="selectOption(option)"
+        class="app-select__option"
       >
-        <li
-          v-for="option in options"
-          @click="selectOption(option)"
-          class="app-select__option"
-        >
-          {{ option.label }}
-        </li>
-      </ul>
-    </transition>
+        {{ option.label }}
+      </div>
+    </div>
   </label>
 </template>
 
@@ -35,7 +33,8 @@ export default {
         { label: 'Опция 2', value: 2 },
         { label: 'Опция 3', value: 3 },
       ],
-    }
+    },
+    placeholder: String,
   },
   data() {
     return {
@@ -65,6 +64,7 @@ export default {
       border-radius: $border-radius-field;
       border: $border-field;
       transition: $ui-transition;
+      cursor: pointer;
       &--focus {
         border: $border-field-focus;
         transition: $ui-transition;
@@ -76,6 +76,8 @@ export default {
       width: 100%;
       box-shadow: $shadow-default;
       background-color: $bg-default-color;
+      border-radius: 3px;
+      /*z-index: 2;*/
     }
     &__option {
       font-size: $ui-font-size;
@@ -85,6 +87,7 @@ export default {
       align-items: center;
       padding: 0 14px;
       transition: $ui-transition;
+      cursor: pointer;
       &:hover {
         transition: $ui-transition;
         background: $bg-hover-color;
