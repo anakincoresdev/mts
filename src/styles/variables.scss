@@ -1,0 +1,23 @@
+// Colors
+$main-color: #E30611;
+$text-color: #666666;
+$contrast-text-color: #ffffff;
+$bg-default-color: #ffffff;
+$bg-substrate: #f1f1f1;
+$border-color: #dfdfdf;
+$border-color-focus: #828282;
+$bg-hover-color: #C4C4C4;
+
+// Size
+$ui-font-size: 15px;
+$font-size-title: 24px;
+$ui-height: 40px;
+$padding-field: 0 13px;
+
+// More
+$ui-transition: 300ms;
+$shadow-default: 0px 2px 5px rgba(0, 0, 0, 0.15);
+$border-radius-block: 5px;
+$border-radius-field: 3px;
+$border-field: 1px solid $border-color;
+$border-field-focus: 1px solid $border-color-focus;
