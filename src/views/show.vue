@@ -1,20 +1,19 @@
 <template>
   <div class="show">
     <div class="show__head">
-      <h1 class="show__title">Название</h1>
+      <h1 class="show__title">{{ task.entry.title }}</h1>
     </div>
     <div class="show__main">
       <p class="show__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquam aliquid, aut deleniti dignissimos excepturi illo ipsa labore libero repellendus rerum similique, veritatis, voluptas. A accusantium ad commodi, consequuntur cum debitis dolorum et exercitationem fugiat fugit ipsum nam nemo nihil omnis optio possimus quae quaerat quia quo tempora temporibus veniam?</p>
       <img src="../assets/show.png" style="width: 100%">
       <div class="show__buttons">
-        <app-button @click="check" class="show__button">
+        <app-button v-if="!task.learned" @click="check" class="show__button">
           Ознакомился
         </app-button>
         <app-button @click="$router.push({name: 'home'})" outline class="show__button">
           Отмена
         </app-button>
       </div>
-
     </div>
   </div>
 </template>
@@ -26,6 +25,11 @@ export default {
   name: "show",
   components: {
     AppButton,
+  },
+  computed: {
+    task() {
+      return this.$store.state.task;
+    },
   },
   created() {
     this.$store.dispatch('getTask', this.$route.params.id);

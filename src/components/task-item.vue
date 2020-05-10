@@ -31,6 +31,7 @@
 export default {
   name: "task-item",
   props: {
+    item: Object,
     checked: Boolean,
     withoutCheck: Boolean,
   },

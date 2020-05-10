@@ -5,16 +5,13 @@
     <div class="user-board__check-title">
       <h1 class="user-board__title">Чек-лист</h1>
     </div>
-    <div class="user-board__task-items">
-      <task-item class="user-board__task-item" checked>
-        Сезонная акция “подключи домашний интернет и ТВ, получи приставку в подарок”
+    <div v-if="tasks && tasks.length" class="user-board__task-items">
+      <task-item v-for="task in tasks" :item="task" class="user-board__task-item" :checked="task.learned">
+        {{ task.title }}
       </task-item>
-      <task-item class="user-board__task-item" checked>
-        7 правил работы с клиентом
-      </task-item>
-      <task-item class="user-board__task-item">
-        Название статьи, например: корморотивные ценности
-      </task-item>
+    </div>
+    <div v-else class="user-board__empty" style="height: 200px; display: flex; align-items: center; justify-content:center;font-size: 24px;padding-bottom: 60px;">
+      Пусто
     </div>
     <h1 class="user-board__title">Коллеги</h1>
     <img
@@ -37,7 +34,15 @@ export default {
     ProgressBar,
     TaskItem,
     AppButton,
-  }
+  },
+  computed: {
+    tasks() {
+      return this.$store.state.tasks;
+    }
+  },
+  created() {
+    this.$store.dispatch('getUserTasks');
+  },
 }
 </script>
 

@@ -35,6 +35,12 @@ export default new Vuex.Store({
         commit('setItem', {name: 'task', item:response.data});
       });
     },
+    getUserTasks: ({commit}) => {
+      return axios.get('http://aviatis.ru:3001/entry/user?user_id=1', data).then(response => {
+        console.log(response);
+        commit('setItem', {name: 'tasks', item:response.data});
+      });
+    },
     setLearnStatus: ({commit}, id) => {
       return axios.post(`http://aviatis.ru:3001/entry/id-${id}/learn?user_id=1`);
     }

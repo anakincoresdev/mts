@@ -50,6 +50,7 @@
         <task-item
           v-for="task in tasks"
           :key="task.id"
+          :item="task"
           withoutCheck
           class="admin__item"
         >
