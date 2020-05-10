@@ -1,42 +1,35 @@
 <template>
   <div class="questions">
-    <h1 class="questions__title">Анкета стажера</h1>
-    <main class="questions__main">
-      <div class="questions__group">
-        <h3 class="questions__question">Ваше образование?</h3>
+    <h1 class="questions__title">Анкета нового сотрудника</h1>
+    <main v-if="questions.features" class="questions__main">
+      <div
+        v-for="question in questions.features"
+        class="questions__group"
+      >
+        <h3 class="questions__question">{{ question.title }}?</h3>
+        <app-radio-buttons
+          v-if="question.type === 'yesno'"
+          :elements="[{name: 'Да', value: 'yes'},{name: 'Нет', value: 'no'}]"
+        />
         <app-select
+          v-else-if="question.type === 'select'"
           :options="[{label: 'Высшее', value: 1},{label: 'Средне-специальное', value: 2}]"
           placeholder="Выберите из вариантов"
         />
+        <div
+          v-else-if="question.type === 'multiselect'"
+          class="questions__check-group"
+        >
+          <checkbox
+            v-for="item in question.featureValues"
+            small
+            class="questions__checkbox"
+          >
+            {{ item.value }}
+          </checkbox>
+        </div>
       </div>
-      <div class="questions__group">
-        <h3 class="questions__question">Владеете ли вы английским языком?</h3>
-        <app-radio-buttons
-          :elements="[{name: 'Да', value: 1},{name: 'Нет', value: 2}]"
-        />
-      </div>
-      <div class="questions__group">
-        <h3 class="questions__question">Какие принципы работы сервера вы понимаете?</h3>
-        <app-select
-          :options="[{label: 'Apache', value: 1},{label: 'Nginx', value: 2},{label: 'IIS,', value: 3}]"
-          placeholder="Выберите из вариантов"
-        />
-      </div>
-      <div class="questions__group">
-        <h3 class="questions__question">Умеете ли вы писать юнит-тесты и покрывать код тестами?</h3>
-        <app-select
-          :options="[{label: 'Да', value: 1},{label: 'Нет', value: 2}]"
-          placeholder="Выберите из вариантов"
-        />
-      </div>
-      <div class="questions__group">
-        <h3 class="questions__question">Какими фреймворками вы владеете?</h3>
-        <app-select
-          :options="[{label: 'React', value: 1},{label: 'Angular', value: 2},{label: 'Vue', value: 3},{label: 'Ember', value: 4}]"
-          placeholder="Выберите из вариантов"
-        />
-      </div>
-      <app-button @click="$router.push({name: 'home'})">Готово</app-button>
+      <app-button @click="sendQuestionary">Готово</app-button>
     </main>
   </div>
 </template>
@@ -45,6 +38,7 @@
 import AppSelect from '@/components/form-fields/app-select.vue'
 import AppButton from '@/components/ui/app-button.vue'
 import AppRadioButtons from '@/components/form-fields/app-radio-buttons.vue'
+import Checkbox from '../components/form-fields/checkbox.vue'
 
 export default {
   name: "questions",
@@ -52,6 +46,25 @@ export default {
     AppSelect,
     AppRadioButtons,
     AppButton,
+    Checkbox,
+  },
+  data() {
+    return {
+      formData: {}
+    };
+  },
+  computed: {
+    questions() {
+      return this.$store.state.questions;
+    },
+  },
+  mounted() {
+    this.$store.dispatch('getQuestions');
+  },
+  methods: {
+    sendQuestionary() {
+      this.$router.push({name: 'home'});
+    }
   },
 }
 </script>
@@ -74,6 +87,9 @@ export default {
     &__question {
       margin-bottom: 10px;
       font-weight: 600;
+    }
+    &__checkbox {
+      margin-bottom: 5px;
     }
   }
 </style>

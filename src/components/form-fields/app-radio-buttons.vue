@@ -64,9 +64,12 @@
         height: 18px;
         border-radius: 50%;
         background: $bg-default-color;
-        border: 2px solid $main-color;
+        border: 2px solid $text-color;
       }
       &--checked {
+        &:before {
+          border-color: $main-color;
+        }
         &:after {
           content: '';
           position: absolute;

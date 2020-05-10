@@ -4,9 +4,6 @@
     <progress-bar class="user-board__progress-bar" />
     <div class="user-board__check-title">
       <h1 class="user-board__title">Чек-лист</h1>
-      <app-button @click="$router.push({name: 'create'})">
-        Создать информационный квант
-      </app-button>
     </div>
     <div class="user-board__task-items">
       <task-item class="user-board__task-item" checked>

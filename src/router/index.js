@@ -19,6 +19,21 @@ const routes = [
     path: '/create',
     name: 'create',
     component: () => import(/* webpackChunkName: "about" */ '../views/create.vue')
+  },
+  {
+    path: '/create-project',
+    name: 'create-project',
+    component: () => import(/* webpackChunkName: "about" */ '../views/create-project.vue')
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: () => import(/* webpackChunkName: "about" */ '../views/admin.vue')
+  },
+  {
+    path: '/show/:id',
+    name: 'show',
+    component: () => import(/* webpackChunkName: "about" */ '../views/show.vue')
   }
 ]
 

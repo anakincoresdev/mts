@@ -1,19 +1,23 @@
 <template>
   <div class="department-form">
+    <div class="department-form__title">{{ value.code.label }}</div>
     <div class="department-form__row">
       <div class="department-form__group">
         <app-select
-          label="Параметр"
-          :options="[{label: 'IT-Отдел', value: 'IT'}]"
-          placeholder="Выберите параметр"
+          label="Условие"
+          :options="[{label: 'Равно', value: '='},{label: 'Не равно', value: '!='}]"
+          @input="formChanged($event, 'matching')"
+          placeholder="Выберите условие"
           class="department-form__select"
         />
         <div class="department-form__add">+</div>
       </div>
       <div class="department-form__group">
         <app-select
-          label="Условие"
-          placeholder="Выберите условие"
+          label="Значение"
+          :options="dict[value.code.value]"
+          @input="formChanged($event, 'value')"
+          placeholder="Выберите значение"
           class="department-form__select"
         />
       </div>
@@ -31,6 +35,57 @@ export default {
     IconClose,
     AppSelect,
   },
+  props: {
+    value: Object,
+  },
+  data() {
+    return {
+      dict: {
+        position: [
+          { label: 'Директор', value: '1' },
+          { label: 'Руководитель IT-отдела', value: '2' },
+          { label: 'Руководитель отдела разработки', value: '3' },
+          { label: 'Программист frontend', value: '4' },
+          { label: 'Программист backend', value: '5' },
+        ],
+        department: [
+          { label: 'Дирекция', value: '1' },
+          { label: 'IT-отдел', value: '2' },
+          { label: 'Отдел разработки системы заказов', value: '3' },
+        ],
+        eng: [
+          { label: 'Да', value: 'Да' },
+          { label: 'Нет', value: 'Нет' },
+        ],
+        serv: [
+          { label: 'Apache',value:"Apache"},
+          { label: 'NGINX',value:"NGINX"},
+          { label: 'IIS',value:"IIS"}
+        ],
+        bd: [
+          {label: 'Хорошо', value: "Хорошо"},
+          {label: 'Отлично', value: "Отлично"},
+          {label: 'Плохо', value: "Плохо"},
+        ],
+        serv_lang: [
+          { label: 'PHP', value: 'PHP' },
+          { label: 'Go', value: 'Go' },
+          { label: 'Python', value: 'Python' },
+        ],
+        front: [
+          { label: 'Angular', value: 'Angular' },
+          { label: 'React', value: 'React' },
+          { label: 'Vue', value: 'Vue' },
+        ],
+      }
+    };
+  },
+  methods: {
+    formChanged(data, fieldName) {
+      this.value.values[0][fieldName] = data;
+      this.$emit('input', this.value);
+    }
+  },
 }
 </script>
 
@@ -40,6 +95,10 @@ export default {
     border: $border-field-focus;
     padding: 10px 15px;
     background: #f1f1f1;
+    &__title {
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
     &__row {
       width: 100%;
       display: flex;

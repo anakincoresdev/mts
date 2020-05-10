@@ -52,6 +52,7 @@ export default {
   methods: {
     selectOption(option) {
       this.selected = option;
+      this.$emit('input', option.value);
       this.isOpen = false;
     },
   },

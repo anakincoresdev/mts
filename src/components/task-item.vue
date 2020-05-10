@@ -1,7 +1,7 @@
 <template>
-  <div class="task-item">
+  <div @click="$emit('click')" class="task-item" :class="{'task-item--admin': withoutCheck}">
     <div
-      :class="{'task-item--checked': checked}"
+      :class="{'task-item--checked': checked, 'task-item--admin': withoutCheck}"
       class="task-item__check"
     >
       <svg v-if="checked" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,6 +32,7 @@ export default {
   name: "task-item",
   props: {
     checked: Boolean,
+    withoutCheck: Boolean,
   },
 }
 </script>
@@ -41,15 +42,30 @@ export default {
     height: 55px;
     display: flex;
     align-items: center;
+    cursor: pointer;
+    &:hover {
+      background: darken($bg-default-color, 7%);
+    }
+    &--admin &__check {
+      display: none;
+    }
+    &--admin &__info {
+      height: 100%;
+    }
     &__check {
-      border-right: 2px solid $main-color;
       padding-right: 12px;
       margin-left: 5px;
-      margin-right: 15px;
       display: flex;
       align-items: center;
       width: 32px;
       height: 100%;
+    }
+    &__info {
+      padding-left: 15px;
+      border-left: 2px solid $main-color;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     &__more {
       margin-top: 5px;
