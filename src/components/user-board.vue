@@ -6,7 +6,7 @@
       <h1 class="user-board__title">Чек-лист</h1>
     </div>
     <div v-if="tasks && tasks.length" class="user-board__task-items">
-      <task-item v-for="task in tasks" :item="task" class="user-board__task-item" :checked="task.learned">
+      <task-item v-for="task in tasks" @click="$router.push({name: 'show', params: {id: task.entry.id}})" :item="task" class="user-board__task-item" :checked="task.learned">
         {{ task.title }}
       </task-item>
     </div>
