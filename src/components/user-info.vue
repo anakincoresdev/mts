@@ -1,6 +1,6 @@
 <template>
   <div class="user-info">
-    <div class="user-info__avatar"></div>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTKIdo_gn1HC08xyFBkVRPeADUBECYFVHqDFkyvtiqg8O2ZrZg1&usqp=CAU" style="width: 130px; margin-right: 20px">
     <div class="user-info__info">
       <h1 class="user-info__name">Елисеев Владислав Сергеевич</h1>
       <span class="user-info__tags">#стажер, менеджер по продажам</span>

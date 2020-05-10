@@ -4,6 +4,7 @@
     <img
       src="../assets/user-icon.png"
       class="app-header__avatar"
+      @click="changeRole"
     >
   </div>
 </template>
@@ -15,6 +16,15 @@ export default {
   name: "app-header",
   components: {
     Logo,
+  },
+  methods: {
+    changeRole() {
+      if (this.$route.name === 'home') {
+        this.$router.push({name: 'admin'});
+      } else {
+        this.$router.push({name: 'home'});
+      }
+    }
   },
 }
 </script>
